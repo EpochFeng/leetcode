@@ -1,6 +1,8 @@
 package com.github.EpochFeng.leetcode100;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author 冯纪元
@@ -26,5 +28,23 @@ public class NumberThree {
             }
         }
         return Arrays.stream(temp).max().getAsInt()+1;
+    }
+    public int longestConsecutive1(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for (int num : nums) {
+            set.add(num);
+        }
+        int max = 0;
+        for (Integer integer : set) {
+            if (set.contains(integer-1)){
+                continue;
+            }
+            int i = integer;
+            while (set.contains(i+1)){
+                i +=1;
+            }
+            max=Math.max(max,i-integer+1);
+        }
+        return max;
     }
 }
