@@ -10,7 +10,7 @@ package com.github.EpochFeng.leetcode100;
 public class NumberSeven {
     public static void main(String[] args) {
         int[] arry = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
-        int trap = trap1(arry);
+        int trap = trap2(arry);
         System.out.println(trap);
     }
 
@@ -63,6 +63,25 @@ public class NumberSeven {
         return ans;
     }
 
-
-
+    public static int trap2(int[] height) {
+        int ans = 0;
+        int[] leftHeight = new int[height.length];
+        int[] rightHeight = new int[height.length];
+        leftHeight[0]=height[0];
+        rightHeight[height.length-1]=height[height.length-1];
+        for (int i = 1; i < height.length; i++) {
+            leftHeight[i]=Math.max(leftHeight[i-1],height[i]);
+        }
+        for (int i = height.length-2; i >= 0; i--) {
+            rightHeight[i]=Math.max(rightHeight[i+1],height[i]);
+        }
+        for (int i = 1; i < height.length-1; i++) {
+            int temp = height[i];
+            if (temp<leftHeight[i]&&temp<rightHeight[i]){
+                int min = Math.min(leftHeight[i], rightHeight[i]);
+                ans+=min-temp;
+            }
+        }
+        return ans;
+    }
 }
