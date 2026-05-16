@@ -1,6 +1,8 @@
 package com.github.EpochFeng.leetcode100;
 
 import java.util.ArrayDeque;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Queue;
 
 /**
@@ -12,8 +14,8 @@ import java.util.Queue;
  */
 public class NumberEight {
     public static void main(String[] args) {
-        String s = "pp";
-        int i = lengthOfLongestSubstring(s);
+        String s = "abba";
+        int i = lengthOfLongestSubstring1(s);
         System.out.println(i);
     }
     public static int lengthOfLongestSubstring(String s) {
@@ -32,5 +34,21 @@ public class NumberEight {
             max = Math.max(queue.size(), max);
         }
         return max;
+    }
+
+    public static int lengthOfLongestSubstring1(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+        int ans = 0;
+        int left = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (!map.containsKey(s.charAt(i))) {
+                map.put(s.charAt(i), i);
+            }else {
+                left = Math.max(left, map.get(s.charAt(i)) + 1);
+                map.put(s.charAt(i), i);
+            }
+            ans = Math.max(ans, i - left + 1);
+        }
+        return ans;
     }
 }
