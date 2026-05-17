@@ -34,4 +34,24 @@ public class NumberNine {
         }
         return list;
     }
+
+    public List<Integer> findAnagrams1(String s, String p) {
+        List<Integer> lsit = new ArrayList<>();
+        int[] arry = new int[26];
+        for (int i = 0; i < p.length(); i++) {
+            arry[p.charAt(i)-'a']++;
+        }
+        int left = 0;
+        for (int right = 0; right < s.length(); right++) {
+            arry[s.charAt(right)-'a']--;
+            while (arry[s.charAt(right)-'a']<0){
+                arry[s.charAt(left)-'a']++;
+                left++;
+            }
+            if (right-left+1==p.length()){
+                lsit.add(left);
+            }
+        }
+        return lsit;
+    }
 }
