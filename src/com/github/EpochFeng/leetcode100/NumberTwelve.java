@@ -77,12 +77,12 @@ public class NumberTwelve {
     }
     public static boolean checkArry(int[] arryS,int[] arryT){
         for (int i = 'a'; i <= 'z'; i++) {
-            if (arryS[i]<=arryT[i]){
+            if (arryS[i]<arryT[i]){
                 return false;
             }
         }
         for (int i = 'A'; i <= 'Z'; i++) {
-            if (arryS[i]<=arryT[i]){
+            if (arryS[i]<arryT[i]){
                 return false;
             }
         }
