@@ -48,9 +48,8 @@ public class NumberNinteen {
         if (head == null || head.next == null) {
             return head;
         }
-        ListNode next = head.next;
-        ListNode reverse = reverse(next);
-        next.next = head;
+        ListNode reverse = reverse(head.next);
+        head.next.next = head;
         head.next = null;
         return reverse;
     }
