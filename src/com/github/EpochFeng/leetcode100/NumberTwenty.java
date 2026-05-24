@@ -22,6 +22,32 @@ public class NumberTwenty {
         temp = temp.next;
         return res;
     }
-
+    public boolean isPalindrome1(NumberNinteen.ListNode head) {
+        if(head==null&&head.next==null){
+            return true;
+        }
+        NumberNinteen.ListNode slowy = head;
+        NumberNinteen.ListNode fast = head;
+        while (fast.next!=null&&fast.next.next!=null){
+            slowy = slowy.next;
+            fast =  fast.next.next;
+        }
+        NumberNinteen.ListNode next = slowy.next;
+        NumberNinteen.ListNode newNode = null;
+        while (next!=null){
+            NumberNinteen.ListNode end = next.next;
+            next.next = newNode;
+            newNode = next;
+            next = end;
+        }
+        while (newNode!=null){
+            if (head.val!=newNode.val){
+                return false;
+            }
+            head = head.next;
+            newNode = newNode.next;
+        }
+        return true;
+    }
 
 }
