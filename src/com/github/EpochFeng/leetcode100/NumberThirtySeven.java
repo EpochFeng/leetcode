@@ -1,5 +1,7 @@
 package com.github.EpochFeng.leetcode100;
 
+import java.util.ArrayDeque;
+
 /**
  * @author 冯纪元
  * @ClassName NumberThirtySeven
@@ -30,5 +32,21 @@ public class NumberThirtySeven {
         }
         pre =root.val;
         return isValidBST2(root.right);
+    }
+    public boolean isValidBST3(TreeNode root) {
+        ArrayDeque<TreeNode> queue = new ArrayDeque<>();
+        queue.add(root);
+        while (root!=null||!queue.isEmpty()){
+            while (root!=null){
+                queue.push(root);
+                root = root.left;
+            }
+            TreeNode pop = queue.pop();
+            if (pop.val<=pre)return false;
+            pre =pop.val;
+            root = pop.right;
+        }
+
+        return true;
     }
 }
