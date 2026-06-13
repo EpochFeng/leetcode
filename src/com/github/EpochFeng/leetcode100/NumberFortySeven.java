@@ -9,36 +9,31 @@ package com.github.EpochFeng.leetcode100;
  */
 public class NumberFortySeven {
     public int[] searchRange(int[] nums, int target) {
+       if (nums==null||nums.length==0) return new int[]{-1,-1};
+        int left = searchRange1(nums, target, true);
+        if (left==-1)return new int[]{-1,-1} ;
+        int right = searchRange1(nums, target, false);
+        return new int[]{left,right};
+    }
+    public int searchRange1(int[] nums, int target,boolean flag) {
         int left = 0;
         int right = nums.length-1;
-        int temp = -1;
+        int ans = -1;
         while (left<=right){
             int middle = (left + right) / 2;
             if (nums[middle]==target){
-                temp = middle;
-                break;
+                ans = middle;
+                if (flag){
+                    right=middle-1;
+                }else {
+                    left = middle+1;
+                }
             }else if (nums[middle]<target){
-                left=middle+1;
+                left = middle+1;
             }else {
-                right= middle-1;
+                right = middle-1;
             }
         }
-        if (temp==-1)return new int[]{-1,-1};
-        int[] ints = new int[2];
-        for (int i = temp; i < nums.length; i++) {
-            while (nums[i]!=target){
-               i++;
-            }
-            ints[1] = i-1;
-            break;
-        }
-        for (int i = temp; i >= 0; i--) {
-            while (nums[i]!=target){
-             i--;
-            }
-            ints[0]=i+1;
-            break;
-        }
-        return ints;
+        return ans;
     }
 }
