@@ -6,24 +6,25 @@ import java.util.Stack;
  * @author 冯纪元
  * @ClassName NumberFiftyThree
  * @description: TODO
- * @datetime 2026年 06月 17日 19:55
+ * @datetime 2026年 06月 25日 3:03 PM
  * @version: 1.0
  */
 public class NumberFiftyThree {
     public int[] dailyTemperatures(int[] temperatures) {
-        int[] arr = new int[temperatures.length];
         Stack<Integer> stack = new Stack<>();
+        int[] arry = new int[temperatures.length];
         for (int i = 0; i < temperatures.length; i++) {
-            while (!stack.isEmpty()&&temperatures[i]>temperatures[stack.peek()]){
-                Integer pop = stack.pop();
-                arr[pop] = i-pop;
+            if (stack.isEmpty()||temperatures[stack.peek()]>=temperatures[i]){
+                stack.push(i);
+            }else {
+                while (!stack.isEmpty()&&temperatures[stack.peek()]<temperatures[i]){
+                        Integer pop = stack.pop();
+                        arry[pop] = i-pop;
+                }
+                stack.push(i);
             }
-            stack.push(i);
         }
-        while (!stack.isEmpty()){
-            Integer pop = stack.pop();
-            arr[pop] = 0;
-        }
-        return arr;
+
+        return arry;
     }
 }
