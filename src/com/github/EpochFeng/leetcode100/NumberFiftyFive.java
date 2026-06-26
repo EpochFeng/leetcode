@@ -43,4 +43,39 @@ public class NumberFiftyFive {
         return low;
     }
 
+    public int findKthLargest1(int[] nums, int k) {
+        int length = nums.length;
+        sort(nums,length);
+        for (int i = 1; i < k+1; i++) {
+            int temp = nums[0];
+            nums[0] = nums[length-i];
+            nums[length-i] =temp;
+            heapify(nums,length-i,0);
+        }
+        return nums[nums.length-k];
+    }
+    public void sort(int[] nums,int length){
+        for (int i = length/2-1; i >=0; i--) {
+            heapify(nums,length,i);
+        }
+    }
+    public void heapify(int[] nums,int n,int i){
+        int left = 2*i+1;
+        int right = 2*i+2;
+        int temp = i;
+        if (left<n&&nums[left]>nums[temp]){
+            temp = left;
+        }
+        if (right<n&&nums[right]>nums[temp]){
+            temp = right;
+        }
+        if (temp!=i){
+            int temporary = nums[i];
+            nums[i] = nums[temp];
+            nums[temp] = temporary;
+            heapify(nums,n,temp);
+        }
+
+    }
+
 }
